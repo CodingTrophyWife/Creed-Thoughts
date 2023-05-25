@@ -1,1 +1,1 @@
-# Creed-Thoughts
+# Creeds-Thoughts
