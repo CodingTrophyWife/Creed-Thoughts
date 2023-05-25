@@ -1,0 +1,38 @@
+   <div class="bg-primary-subtle text-primary-emphasis">
+    <h1> <span class="badge bg-secondary mb-3 ms-4">The Dashboard</span></h1>
+{{#if currentUser}}
+<section id="btn-box" class="box">
+    <button id="edit">Edit</button>
+    <button id="delete">Delete</button>
+</section>
+{{/if}}
+
+<li class="post">
+    <section>
+        <h2 class="title">{{post.title}}</h2>
+        <aside>
+            <p>{{post.User.name}}</p>
+            <p class="date">{{post.createdAt}}</p>
+        </aside>
+    </section>                
+    <p class="body">{{post.body}}</p>
+</li>
+<ul class="comments">
+    {{#each post.Comments as |comment|}}
+        <li class="comment post">
+            <section>
+                <h3>{{comment.User.name}}</h2>
+                <p>{{comment.createdAt}}</p>
+            </section>                
+            <p class="body">{{comment.body}}</p>
+        </li>
+    {{/each}}
+</ul>
+{{#if cookie.logged_in}}
+<form id="new-comment"> 
+    <input type="text">
+    <button type="submit">Post A New Comment</button>
+</form>
+{{/if}}
+
+<script src="/js/post.js"></script>
