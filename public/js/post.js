@@ -1,17 +1,23 @@
-const completeBtns = document.querySelectorAll(".deleteButton");
-
-completeBtns.forEach((button) => {
-  button.addEventListener("click", (event) => {
-    console.log("===\n\n\ntest\n\n\n===");
-    event.preventDefault();
-    const postId = document.querySelector("#delete").dataset.id;
-    console.log("postId:", postId);
-    const response = fetch(`/api/posts/${postId}`, {
-      method: "DELETE",
+//signup form
+document.querySelector("#new-post").addEventListener("submit", e => {
+  e.preventDefault();
+  const postObj = {
+      title: document.querySelector("#post-title").value,
+      body: document.querySelector("#post-body").value,
+  }
+  console.log(postObj)
+  fetch("/api/posts", {
+      method: "POST",
+      body: JSON.stringify(postObj),
       headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    location.reload();
-  });
-});
+          "Content-Type": "application/json"
+      }
+  }).then(res => {
+      if (res.ok) {
+          location.href = "/profile"
+      } else {
+          console.log(res)
+          alert("Error post not made")
+      }
+  })
+})

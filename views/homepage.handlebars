@@ -1,7 +1,29 @@
-<section class="post-cards">
-   <a href="/CreatePost"> <button id="create-button">Create Post</button></a>
-{{#each allPosts}}
-{{> posts}}
+{{#each allPosts as |post|}}
+    {{log username}}
+
+    <div class="container">
+        <h2>{{user.username}} {{post.created_at}}</h2>
+
+        <h3>{{post.title}}</h3>
+        <p>
+            {{post.body}}
+        </p>
+        
+
+        <button class="comment">
+            comment
+        </button>
+    </div>
+ 
+    <div class="comments" style="display:none">
+        <h2>{{user.username}}</h2>
+        <textarea class="form-control" id="comment-body">
+
+        </textarea>
+        <button class="addComment" type="submit" data-id={{post.id}}>
+            submit
+        </button>
+    </div>
+
 {{/each}}
-</section>
-<script src="/js/post.js"></script>
+<script src="/js/home.js"></script>

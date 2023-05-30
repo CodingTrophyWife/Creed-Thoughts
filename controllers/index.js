@@ -1,19 +1,8 @@
-const router = require("express").Router();
+const router = require('express').Router();
+const apiRoutes = require('./api');
+const homeRoutes = require('./homeRoutes');
 
-router.get("/cookie", async (req, res) => {
-    try {
-      res.json(req.session);
-    } catch (err) {
-      console.log("err:", err);
-    }
-  });
-  
-  const apiRoutes = require("./api");
-  router.use("/api", apiRoutes);
-  
-  const pageRoutes = require("./pages");
-  router.use("/", pageRoutes);
+router.use('/api', apiRoutes);
+router.use('/', homeRoutes);
 
-
-
-  module.exports = router;
+module.exports = router;

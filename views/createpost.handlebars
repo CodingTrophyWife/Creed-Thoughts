@@ -1,0 +1,27 @@
+<div class="container text-center position-absolute top-50 start-50 translate-middle">
+    <div class="row align-items-center">
+        <div class="col">
+            <h3 style="background-color: var(--brown); color: var(--white); width: 100%; padding:3px;">Create New Post
+            </h3>
+            <form id="new-post">
+                <div class="mb-3">
+                    <label for="recipient-name" class="col-form-label">Post Title</label>
+                    <input type="text" class="form-control" id="post-title">
+                </div>
+                <div class="mb-3">
+                    <label for="message-text" class="col-form-label">Post Body</label>
+                    <textarea class="form-control" id="post-body"></textarea>
+                </div>
+
+                <button type="submit" class="new-post btn"
+                    style="height: 60px; width:150px; background-color:var(--brown); color:var(--white); font-weight:bold;">
+                    Publish
+                </button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/post.js"></script>
+<script src="/js/logout.js"></script>

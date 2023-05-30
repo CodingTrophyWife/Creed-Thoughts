@@ -1,15 +1,12 @@
-const logoutBtn = document.querySelector("#logout");
-
-logoutBtn.addEventListener("click", async (event) => {
-  try {
-    event.preventDefault();
-    const response = await fetch("/api/users/logout", {
+document.querySelector("#logout").addEventListener("click", e => {
+  e.preventDefault();
+  fetch("/api/users/logout", {
       method: "POST",
-    });
-    if (response.ok) {
-      location.href = "/login";
-    } else {
-      next();
-    }
-  } catch (err) {}
-});
+  }).then(res => {
+      if (res.ok) {
+          location.reload()
+      } else {
+          alert("trumpet sound")
+      }
+  })
+})

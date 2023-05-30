@@ -1,47 +1,23 @@
-const signUpForm = document.querySelector("#signup-form");
-
-const checkPassword = (pass1, pass2) => {
-  if (pass1 === pass2) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-signUpForm.addEventListener("submit", async (event) => {
-  try {
-    const password = document.querySelector("#user-password").value;
-    const passConfirm = document.querySelector(
-      "#user-password-confirmation"
-    ).value;
-    if (await checkPassword(password, passConfirm)) {
-      event.preventDefault();
-
-      const newUser = {
-        userName: document.querySelector("#user-name").value,
-        email: document.querySelector("#user-email").value,
-        password: document.querySelector("#user-password").value,
-      };
-
-      const response = await fetch("/api/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newUser),
-      });
-      console.log("response:", response);
-      if (response.ok) {
-        location.href = "/";
-      } else {
-        alert("some error");
-      }
-    } else {
-      console.log("===\n\n\ntest\n\n\n===");
-      alert("passwords must be the same");
+//signup form
+const signupForm = document.querySelector("#signup-form");
+signupForm.addEventListener("submit", e => {
+    e.preventDefault();
+    const userObj = {
+        username: document.querySelector("#signup-username").value,
+        password: document.querySelector("#signup-password").value,
     }
-  } catch (err) {
-    console.log("error:", error);
-    alert(err);
-  }
-});
+    fetch("/api/users", {
+        method: "POST",
+        body: JSON.stringify(userObj),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(res => {
+        if (res.ok) {
+            location.href = "/"
+        } else {
+            console.log(res)
+            alert("Signup error, please try again.")
+        }
+    })
+})

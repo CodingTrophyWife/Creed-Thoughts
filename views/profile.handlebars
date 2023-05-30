@@ -1,0 +1,23 @@
+{{log username}}
+{{#each posts as |post|}}
+    {{log username}}
+
+    <div class="container">
+        <h2>{{username}}</h2>
+        <h3>{{post.title}}</h3>
+        <p>
+
+            {{post.body}}
+        </p>
+    </div>
+{{/each}}
+
+
+<footer class="fixed-bottom container text-center" style="height: 100px;">
+    <a href="/create">
+        <button type="button" class="new-post btn"
+            style="height: 60px; width:150px; background-color:var(--brown); color:var(--white); font-weight:bold;">
+            + New Post
+        </button>
+    </a>
+</footer>
