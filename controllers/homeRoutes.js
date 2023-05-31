@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Post, User } = require("../models");
+const { Post, Comment, User } = require("../models");
 
 router.get("/", (req, res) => {
     try {
@@ -8,12 +8,10 @@ router.get("/", (req, res) => {
             include: [User],
         }).then((postData) => {
             const hbsData = postData.map((post) => post.get({ plain: true }));
-            console.log(hbsData);
             res.render("homepage", {
                 pagetitle: "Creed Thoughts",
                 allPosts: hbsData,
                 logged_in: req.session.logged_in,
-                // comments: hbsdata,
             });
         })
     } catch (error) {
@@ -29,7 +27,6 @@ router.get("/post/:id", (req, res) => {
     }).then((projData) => {
         const hbsData = projData.get({ plain: true });
         hbsData.logged_id = req.session.logged_id;
-        console.log(hbsData);
         res.render("singlePost", hbsData);
     });
 });
@@ -39,7 +36,6 @@ router.get("/comment/:id", (req, res) => {
     }).then((projData) => {
         const hbsData = projData.get({ plain: true });
         hbsData.logged_id = req.session.logged_id;
-        console.log(hbsData);
         res.render("singlePost", hbsData);
     });
 });
@@ -89,15 +85,18 @@ router.get('/logout', (req, res) => {
 router.get("/profile", (req, res) => {
     try {
         Post.findAll({
+            include: [
+                {model: Comment, attributes: ["id", "body", "user_id", "post_id"], include: [User]},
+                {model: User, attributes: ["username"]},
+            ],
+            attributes: ["id", "title", "body", "user_id"],
             where: {
                 user_id: req.session.user_id
             }
         }).then((userPost) => {
-            const hbsData = userPost.map((post => post.get({
+            const hbsData = userPost.map(post => post.get({
                 plain: true
-
-
-            })));
+            }));
             res.render("profile", {
                 pagetitle: "Your Dashboard",
                 posts: hbsData,

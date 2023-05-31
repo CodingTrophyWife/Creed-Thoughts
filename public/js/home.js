@@ -1,25 +1,23 @@
-const commentSection = document.querySelectorAll(".comments")
-const addComment = document.querySelectorAll(".addComment")
-const textArea = document.querySelectorAll(".form-control")
-console.log(commentSection)
-
-const commentBtns = document.querySelectorAll(".comment")
+const commentSection = document.querySelectorAll(".comments");
+const textArea = document.querySelectorAll(".form-control");
+const commentBtns = document.querySelectorAll(".comment");
 
 commentBtns.forEach((commentBtn, i) => {
     commentBtn.addEventListener('click', e => {
-        console.log(commentBtn)
-        console.log(i)
-        console.log(commentSection[i])
-        commentSection[i].setAttribute("style", "")
-    })
+        console.log(commentBtn);
+        console.log(i);
+        console.log(commentSection[i]);
+        commentSection[i].setAttribute("style", "");
+        const addComment = document.querySelector(".addComment");
+        addComment.addEventListener('click', e => {
+            e.preventDefault();
+            console.log(e.target.getAttribute("data-id"));
+            console.log(textArea[i].value);
+        });
+    });
+});
 
-    addComment[i].addEventListener('click', e => {
-        e.preventDefault()
-        console.log(e.target.getAttribute("data-id"))
-        console.log(textArea[i].value)
     
-    })
-})
 
 
 

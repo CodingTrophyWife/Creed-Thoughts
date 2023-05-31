@@ -1,5 +1,5 @@
 const sequelize = require("../config/connection");
-const { User, Blog, Comment } = require("../models");
+const { User, Post, Comment } = require("../models");
 
 const users = [
     {
@@ -11,7 +11,7 @@ const users = [
     },
 ];
 
-const blogs = [
+const posts = [
     {
         title: "Cults",
         body: "I've been involved in a number of cults, both as a leader and a follower. You have more fun as a follower. But, you make more money as a leader.",
@@ -25,13 +25,13 @@ const blogs = [
 
 const comments = [
     {
-        contents: "Makes Sense.",
+        body: "Makes Sense.",
         user_id: 1,
-        blog_id: 1,
+        post_id: 1,
     },{
-        contents: "So who are you?",
+        body: "So who are you?",
         user_id: 2,
-        blog_id: 1,
+        post_id: 1,
     },
 ];
 
@@ -39,7 +39,7 @@ const startSeedin = async () => {
     try {
         await sequelize.sync({ force: true });
         await User.bulkCreate(users, { individualHooks: true });
-        await Blog.bulkCreate(blogs);
+        await Post.bulkCreate(posts);
         await Comment.bulkCreate(comments);
         
         process.exit(0);
