@@ -1,21 +1,27 @@
 :root {
-    --brown: #2e1d1d;
-    --mint: #c9f5d9;
+    --black: black;
+    --mint: red;
     --white: white;
     --grey: #ccc;
 }
 
 nav {
     margin-left: 20px;
+
 }
 
 h1.home {
     background-color: var(--mint);
-    color: var(--brown);
+    color: var(--black);
     border-radius: 8px;
     filter: drop-shadow(10px 5px 4px var(--grey));
     padding: 10px;
     margin-left: 30px;
     width: fit-content;
     font-weight: bold;
+  
+}
+
+.home {
+    align-items: center;
 }
